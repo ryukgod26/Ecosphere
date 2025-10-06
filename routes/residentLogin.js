@@ -1,0 +1,36 @@
+const express = require("express");
+const passport = require("../routes/passport");
+const residentLoginRouter = express.Router();
+
+// start Google OAuth
+residentLoginRouter.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// Google OAuth callback
+residentLoginRouter.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/resident",
+    failureRedirect: "/residentLogin",
+    failureFlash: true
+  })
+);
+
+
+residentLoginRouter.post(
+  "/", passport.authenticate("local", {
+    successRedirect: "/resident",       
+    failureRedirect: "/residentLogin",  
+    failureFlash: true                  
+  })
+);
+
+
+residentLoginRouter.get("/", (req, res) => {
+  res.render("residentLogin", { error: req.flash("error") });
+});
+
+
+module.exports = residentLoginRouter;

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <title>ECOSPHERE| HOME</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <div class="nl">
+                <img src="/images/logo.png" alt="">
+            </div>
+            <div class="nr">
+                <a href="/">HOME</a>
+                <a href="/residentLogin">RESIDENT</a>
+                <a href="/cleanerLogin">CLEANER</a>
+            </div>
+        </nav>
+        <div id="page1">
+            <div id="pg1-container">
+                <div id="header">
+                    <h1>E</h1>
+                    <h1>C</h1>
+                    <h1>O</h1>
+                    <h1>S</h1>
+                    <h1>P</h1>
+                    <h1>H</h1>
+                    <h1>E</h1>
+                    <h1>R</h1>
+                    <h1>E</h1>
+                </div>
+                <div id="pg1-blur"></div>
+            </div>
+
+        </div>
+        
+        <div id="tagline">
+            <div id="marqueue">
+                <h1>SPOT IT!</h1>
+            </div>
+            <div id="marqueue">
+                <h1>REPORT IT!</h1>
+            </div>
+            <div id="marqueue">
+                <h1>FIX IT!</h1>
+            </div>
+        </div>
+        <div id="aboutPage">
+            <div id="about-container">
+                <p>
+EcoSphere is your community portal for a cleaner environment. We believe residents are the key to a better neighborhood.
+It works simply: if you see litter or dirty surroundings, just upload a quick image and report to our site. Local cleaning teams instantly see the issue and dispatch to clean it up. When you confirm the positive change with your feedback, we know the job is done.
+Our mission is driven by our motto: Spot it. Report it. Fix it. Join us in making your area cleaner, healthier, and happier—one report at a time!</p>
+            </div>
+        </div>
+        <div class="pg2-blur-top"></div>
+        <div id="page2">
+            <div id="pg2-container">
+                <h1>LINK</h1>
+                <div class="links">
+                    <div class="link"><a href="/resident">RESIDENT</a></div>
+                    <div class="link"><a href="/cleaner">CLEANER</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="pg2-blur-bottom"></div>
+        <div id="chatPage">
+            <div id="chatbox">
+            <h2>Chat with Cerebras</h2>
+            <div id="messages"></div>
+
+            <form id="chatForm">
+            <input type="text" id="message" name="message" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+            </form>
+        </div>
+        </div>
+        <div id="page3">
+            <div class="line"></div>
+            <div id="contact-pg4" >
+                <div class="contact-container" >
+                    <h1>Leave Us A Message</h1>
+                    <form action="https://api.web3forms.com/submit" method="POST" class="contact-left">
+                         <input type="hidden" name="access_key" value="c4388d19-d35d-4147-a842-88d3a3865c66">
+                        <div id="label">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required >
+                        </div>
+                        <div id="label">
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" placeholder="Your Email id" class="contact-inputs" required >
+                        </div>
+                        <div id="label">
+                            <label for="message">Message:</label>
+                            <textarea name="message" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit"> SUBMIT</button>
+                    </form>
+                </div>
+            </div>
+            <div class="line"></div>
+        <footer>
+            <h2>©️2025 TEAM AVENGERS</h2>
+        </footer>
+    </main>
+    <script>
+    const form = document.getElementById('chatForm');
+    const messagesDiv = document.getElementById('messages');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = document.getElementById('message').value;
+      
+      // Display user's message
+      messagesDiv.innerHTML += `<div class="msg user"><b>You:</b> ${message}</div>`;
+      document.getElementById('message').value = '';
+
+      // Send to server
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await res.json();
+
+      // Extract model reply text
+      const reply = data?.choices?.[0]?.message?.content || 'No response';
+      messagesDiv.innerHTML += `<div class="msg bot"><b>AI:</b> ${reply}</div>`;
+    });
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>

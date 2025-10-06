@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <title>ECOSPHERE | ResidentLogin</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <div class="nl">
+                <img src="/images/logo.png" alt="">
+            </div>
+            <div class="nr">
+                <a href="/">HOME</a>
+                <a href="/residentLogin">RESIDENT</a>
+                <a href="/cleanerLogin">CLEANER</a>
+            </div>
+        </nav>
+        <div id="lpage1">
+            <div id="lpg1-container">
+                <h1>Resident Login</h1>
+                <div id="contact-pg4">
+                    <div class="contact-container">
+                        <form action="/residentLogin" method="POST" class="contact-left">
+                            <div class="contact-left-title">
+                            </div>
+                            <input type="hidden" name="access_key" value="dd60566d-3f46-4912-b6f3-2b7e6d1ba018">
+                            <input type="text" name="username" id="id" placeholder="Id" class="contact-inputs" required >
+                            <input type="password" name="password" id="password" placeholder="Password" class="contact-inputs" required >
+                            <button type="submit">SUBMIT</button>
+                        </form>
+                    </div>
+                    <div class="bottomLinks">
+                        <a href="/residentRegister">Not Registered? Register Here...</a>
+                        <a href="/residentLogin/auth/google">
+                            <form action="/residentLogin" method="post">
+                                <button type="button">Login with Google</button>
+                            </form>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h2>©️2025 TEAM AVENGERS</h2>
+        </footer>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>

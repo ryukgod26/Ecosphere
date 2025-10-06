@@ -1,0 +1,10 @@
+gsap.to("#tagline",{
+    x:"-200%",
+    duration:2,
+    scrollTrigger:{
+        trigger:"#tagline",
+        scroller:"body",
+        pin:true,
+        scrub:2
+    }
+})

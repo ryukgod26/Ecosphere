@@ -1,0 +1,55 @@
+🌿 Green Clean Website Palette
+Primary (Greens – for brand identity, CTAs, highlights)
+
+Emerald Green → #2ecc71
+
+Leaf Green → #27ae60
+
+Soft Mint → #a8e6cf
+
+Neutrals (for backgrounds & sections)
+
+White → #ffffff
+
+Light Gray → #f4f4f4
+
+Stone Gray → #e0e0e0
+
+Dark Base (for text, navbar, footer)
+
+Charcoal Black → #2c3e50
+
+Slate Gray → #34495e
+
+Accent (to break monotony, optional)
+
+Sky Blue → #3498db
+
+Warm Beige → #fef5e7
+
+extra-colors- #71BC78
+#3EB484
+
+🌿 Font Suggestions for a Green, Clean Website
+Option 1 (Modern + Minimal)
+
+Headings (Logo, Titles): Poppins (Google Fonts) → clean, modern, bold
+
+Body (Paragraphs, UI text): Open Sans → highly readable, neat
+
+👉 Combo: Poppins + Open Sans = modern + professional
+
+
+deep olive = #3A4630
+
+MOSS = #2E3320
+
+FOREST GREEN = #2E3320
+
+SAGE= #808F69
+
+OLIVE DRAB #8A9A73
+
+COLOR1= #D4F3B7
+
+COLOR2 = BFDAA4

@@ -1,0 +1,111 @@
+#mpage1{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+  background-color:#808F69;
+}
+#mpg1-container{
+  height:100%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color:#D4F3B7;
+}
+#map { 
+  height: 80vh; 
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#reportForm {
+  display: none;
+  position: absolute;
+  height: 50vh;
+  width: 50vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px 2px rgba(0,0,0,1);
+}
+#markForm
+{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5vh;
+}
+#label
+{
+  height: auto;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: none;
+  box-shadow: 2px 2px 10px 2px black;
+  border-radius: 5px;
+  padding: 1% 4%;
+}
+#label2
+{
+  height: auto;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: none;
+  border-radius: 5px;
+  padding: 1% 4%;
+  gap: 4vh;
+}
+#markForm input
+{
+  width: 50%;
+  align-self:start;
+  background-color: none;
+  border: none;
+}
+#label2 button{
+  height: auto;
+  width: 50%;
+  border-radius: 2px;
+  border: none;
+  padding: 2% 4%;
+  color: white;
+  font-weight: 600;
+  box-shadow: 2px 2px 10px 2px black;
+  
+}
+#mpage1 h2{
+  font-weight: 900;
+  font-size: 4vh;
+  color:#3A4630;
+}
+#cancel{
+  background-color: red;
+}
+#submit{
+  background-color: green;
+}
+#cancel:hover{
+  background-color: rgb(135, 0, 0);
+}
+#submit:hover{
+  background-color: rgb(8, 89, 1);
+}
