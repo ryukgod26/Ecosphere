@@ -26,7 +26,7 @@ main{
 }
 
 #lpage1{
-    height: auto;
+    height:100vh;
     width:100vw;
     display: flex;
     align-items: center;
@@ -41,7 +41,6 @@ main{
     justify-content: center;
     flex-direction: column;
     padding: 8% 0 0 0 ;
-    border-bottom: solid #2c3e50 1px;
 }
 
 #lpage1 h1{
@@ -177,6 +176,7 @@ form textarea{
     background-color: transparent;
     text-align: center;
     box-shadow: none;
+    border: none;
 }
 .bottomLinks
 {
@@ -189,38 +189,25 @@ form textarea{
 }
 .bottomLinks a,.bottomLinks button{
     font-size:2vh;
-    color: #2c3e50;
+    color: #3A4630;
     background-color: none;
     border: none;
     cursor: pointer;
 }
-/* .registerForm
-{
-    height: auto;
-    width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap:2vh;
-}
-.registerForm input{
-    background-color: none;
-} */
-
 @media only screen and (max-width: 900px)
 {
-    #page1{
+    #lpage1{
         height: auto;
         margin-top: 15vh;
+        margin-bottom: 10vh;
     }
-    #pg1-container{
+    #lpg1-container{
         height: auto;
     }
-    #page1 h1{
+    #lpage1 h1{
         font-size: 3.5vh;
     }
-    #page1 a{
+    #lpage1 a{
         font-size: 4vw;
     }
     #contact-pg4{
@@ -308,4 +295,16 @@ form textarea{
         height: 3vh;
         padding: 2%;
     }
+    .contact-container h1{
+        font-size: 2vh;
+    }
+    .contact-container button
+    {
+        color:white;
+        font-weight: 900;
+    }
+    .bottomLinks a,.bottomLinks button{
+        font-size: 0.5vh;
+    }
+
 }

@@ -1,54 +1,85 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  // Initialize map
-  const map = L.map('map').setView([31.63, 74.87], 14);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // === Base Layers ===
+  const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
+  });
 
-  // Fetch reports from backend
-  let response = await fetch("/cleaner/api/reports");
-  let reports = await response.json();
+  const satelliteMap = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {
+      attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, IGN, and GIS User Community'
+    }
+  );
 
-  reports.forEach(report => {
-    const [lng, lat] = report.location.coordinates;
+  // === Initialize map ===
+  const map = L.map('map', {
+    center: [31.63, 74.87],
+    zoom: 14,
+    layers: [streetMap]
+  });
 
-    if (report.status === "Pending" || report.status === "Cleaned") {
-      const marker = L.marker([lat, lng]).addTo(map);
+  L.control.layers({ "Street Map": streetMap, "Satellite": satelliteMap }, null, { collapsed: false }).addTo(map);
 
-      const popupContent = document.createElement("div");
-      popupContent.innerHTML = `
-        <b>${report.resident.fullName}</b><br>
-        Mobile: ${report.resident.mobile}<br><br>
-        <img src="${report.image}" width="100"/><br>
-        Status: <span id="status-${report._id}">${report.status}</span><br><br>
-      `;
+  // === Fetch and display pending reports ===
+  async function loadReports() {
+    try {
+      const res = await fetch("/cleaner/api/reports");
+      const reports = await res.json();
 
-      // Add button only if pending
-      if (report.status === "Pending") {
-        const btn = document.createElement("button");
-        btn.textContent = "Mark Cleaned";
-        btn.addEventListener("click", async () => {
-          try {
-            const res = await fetch(`/cleaner/api/mark-cleaned/${report._id}`, { method: "POST" });
-            const data = await res.json();
-            if (data.success) {
-              // Update status text
-              document.getElementById(`status-${report._id}`).textContent = "Cleaned";
-              // Remove button
-              btn.remove();
-            } else {
-              alert("Error: " + data.message);
-            }
-          } catch (err) {
-            console.error(err);
-            alert("Failed to mark cleaned.");
-          }
-        });
-        popupContent.appendChild(btn);
+      // Remove all existing markers
+      if (window.reportMarkers) {
+        window.reportMarkers.forEach(m => map.removeLayer(m));
       }
+      window.reportMarkers = [];
 
-      marker.bindPopup(popupContent);
+      reports.forEach(report => {
+        if (report.status === "Pending" && report.location && report.location.coordinates.length === 2) {
+          const [lng, lat] = report.location.coordinates;
+          const marker = L.marker([lat, lng]).addTo(map);
+
+          const popupContent = `
+            <div style="text-align:center">
+              <img src="${report.image}" alt="Garbage Image" style="width:100px;height:100px;border-radius:10px;object-fit:cover;"><br>
+              <strong>${report.resident.fullName}</strong><br>
+              📞 ${report.resident.mobile}<br>
+              <button data-id="${report._id}" class="markCleanedBtn" style="margin-top:5px;background:#28a745;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
+                Mark as Cleaned
+              </button>
+            </div>
+          `;
+
+          marker.bindPopup(popupContent);
+          window.reportMarkers.push(marker);
+        }
+      });
+    } catch (error) {
+      console.error("Error loading reports:", error);
+    }
+  }
+
+  await loadReports();
+
+  // === Handle Mark as Cleaned ===
+  document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("markCleanedBtn")) {
+      const reportId = e.target.getAttribute("data-id");
+
+      try {
+        const response = await fetch(`/cleaner/api/mark-cleaned/${reportId}`, {
+          method: "POST"
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          alert("Marked as cleaned ✅");
+          await loadReports(); // Refresh map markers
+        } else {
+          alert("Error: " + data.error);
+        }
+      } catch (error) {
+        console.error("Error marking cleaned:", error);
+        alert("Failed to mark as cleaned.");
+      }
     }
   });
 });

@@ -266,17 +266,188 @@ nav{
     text-shadow: 2px 2px 10px  black;
 }
 footer{
-    height:5vh;
+    height:380px;
+    width: 100%;
+    background-color:#31574A;
+    position: relative;
+}
+#footer-bg{
+    height: fit-content;
     width: 100vw;
+}
+#footer-bg img
+{
+    height:fit-content;
+    width: 100%;
+    object-fit:cover;
+    object-position: center;
+}
+.footer-section{
+    padding: 1% 2%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
+    justify-content: space-around;
+    background-color: #31574A;
 }
 footer h2{
     font-size: 3vh;
     font-weight: 800;
-    color:#3A4630;
+    color:#2E3320;
+}
+footer h3,footer a{
+    font-size: 3vh;
+    font-weight:900;
+    color:white;
+    text-decoration: none;
+}
+.footer-line1{
+    
+    text-align: center;
+    justify-content: space-evenly;
+     height:380px;
+    width : 200px;
+    background-color: #31574A;
+
+}
+
+.image-twitter{
+    margin-top: 12px;
+    margin-left: 75px;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+} 
+ .image-instagram{
+      margin-top: 12px;
+    margin-left: 12px;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+
+ }
+.outerwraperimg{
+    margin-right: 30px;
+    height:100px;
+
+    display: flex;
+    
+}
+.linediv1,.linediv2{
+    margin-top: 95px;
+    margin-left: 90px;
+    height: 190px;
+    width: 2px;
+    background-color: black;
+}
+.footer-line2{
+     color: white;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+     text-align: center;
+    justify-content: space-evenly;
+     height:380px;
+    width : 600px;
+    background-color: #31574A;
+}
+.footer-line3{
+     color: white;
+    margin-left: 50px;
+    text-align: center;
+    justify-content: space-evenly;
+     height:380px;
+    width : 200px;
+    background-color:#31574A;
+}
+.footer-bottomline{
+
+    margin-top: 20px;
+    font-size: 16px;
+    background-color:#31574A ;
+    font-weight: bolder;
+
+}
+.lastoutline-footer{
+    margin-top: 3vh;
+    font-weight: bolder;
+    align-items: center;
+    text-align: center;
+};
+.heading-updates{
+    color: black;
+    margin-top: 90px;
+}
+.subscribe-form{
+    margin-top: 50px;
+}
+
+.email-footer{
+    
+    height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid gray;
+}
+
+.username-footer{
+    margin-top: 10px;
+    margin-left: 10px;
+      height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid gray;
+}
+
+.email-footer-button{
+    margin-top: 10px;
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid gray;
+    background-color: black;
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.email-footer-button:hover{
+    background-color: #222; 
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+.outerdivforUsername{
+
+    margin-right: 110px;
+}
+
+.SendUsAMessage-footer{
+    margin-top: 160px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.developerfrom-footer{
+    margin-top: 10px;
+}
+
+.imglogo-fotter{
+    margin-top: 30px;
+    margin-left: 65px;
+    height: 80px;
+    width: 80px;
+    background-image: url("/images/logo.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-radius: 50%;
 }
 #page3{
     margin-top: 5vh;
@@ -298,7 +469,7 @@ footer h2{
 .line{
     height: 0.2vh;
     width:50vw;
-    background-color: #3A4630;
+    background-color:black;
     align-self: center;
     border-radius:50px;
 }
@@ -318,31 +489,60 @@ footer h2{
     justify-content: center;
     align-items: center;
 }
-#marqueue
-h1{
+#marqueue h1{
     font-size: 25vh;
     font-weight:900;
     font-family:'Times New Roman', Times, serif;
     color:#3A4630;
 }
-
+.footer-line2 h1{
+    font-size: 6vh;
+    color: #e0e0e0;
+}
 @media (max-width: 900px) {
   nav {
-    height: 7vh;
+    height: 10vh;
   }
   .nl img {
-    height: 5vh;
-    width: 5vh;
+    height: 6vh;
+    width: 6vh;
+  }
+  .nr{
+    padding: 0 2% 0 0;
   }
   .nr a {
-    font-size: 1.5vh;
-    padding: 0.5vh 1.2vh;
+    font-size:1.5vh;
+    padding: 2% 4%;
+    border-radius: 2px;
+  }
+  #page1
+  {
+    height:100vh;
+    margin-top: 0;
+  }
+  #tagline
+  {
+    height:30vh;
+  }
+  #tagline h1
+  {
+    font-size: 5vh;
   }
   #header h1 {
-    font-size: 10vh;
+    font-size: 6vh;
   }
   #about-container p {
     font-size: 2vh;
+  }
+  #chatPage
+  {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2% 4%;
+  }#chatbox{
+    width: 100%;
   }
   #chatPage h2 {
     font-size: 3vh;
@@ -357,40 +557,48 @@ h1{
   .link a {
     font-size: 2.5vh;
   }
-  #marqueue h1 {
-    font-size: 8vh;
+  footer{
+    height: auto;
+    width: 100vw;
+    flex-direction: column;
   }
+  .footer-section
+  {
+    width: 100vw;
+    flex-direction: column;
+  }
+  .linediv1,.linediv2
+  {
+    display: none;
+  }
+  .footer-line1,.footer-line2,.footer-line3
+  {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 4% 2%;
+    margin: 0;
 }
-
-@media (max-width: 600px) {
-  #header h1 {
-    font-size: 8vh;
-  }
-  #chatbox {
-    width: 90%;
-    min-height: 25vh;
-  }
-  #chatForm input {
-    width: 80%;
-  }
-  .link {
-    width: 130px;
-    height: 90px;
-  }
-  .link a {
+  .footer p
+  {
     font-size: 2vh;
+    width: 100%;
   }
-  #pg2-container h1 {
-    font-size: 3.5vh;
+  .footer-line2 h1
+  {
+    font-size: 5vh;
   }
-  #about-container {
-    width: 90%;
-    padding: 4%;
+  .footer-line3
+  {
+    display: none;
+
   }
-  #about-container p {
-    font-size: 1.8vh;
-  }
-  #marqueue h1 {
-    font-size: 6vh;
+  .footer-line1
+  {
+    gap: 2vh;
   }
 }

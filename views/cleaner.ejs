@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/favicon/site.webmanifest">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
     <link rel="stylesheet" href="/stylesheets/dashboard.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <title>Ecosphere | Cleaner Dashboard</title>
@@ -30,9 +31,88 @@
                 <h2>Welcome, <%= cleaner.fullName %></h2>
                 <div id="map"></div>
             </div>
+            
         </div>
-        <footer>
-            <h2>©️2025 TEAM AVENGERS</h2>
+        <div id="editFeature">
+              <h2>Edit Your Details</h2>
+              <form action="/cleaner/edit-details/" method="POST">
+                <div id="label" class="label2">
+                  <label>Full Name:</label>
+                <input type="text" name="fullName" value="<%= cleaner.fullName || '' %>" required>
+                </div>
+
+              <div id="label" class="label2">
+                <label>Mobile:</label>
+                <input type="text" name="mobile" value="<%= cleaner.mobile || '' %>" required>
+
+              </div>
+                <div id="label" class="label2">
+                  <label>Locality:</label>
+                <input type="text" name="locality" value="<%= cleaner.locality || '' %>" required>
+                </div>
+
+                <div id="label" class="label2">
+                  <label>City:</label>
+                <input type="text" name="city" value="<%= cleaner.city || '' %>" required>
+                </div>
+
+                <div id="label" class="label2">
+                  <label>State:</label>
+                <input type="text" name="state" value="<%= cleaner.state || '' %>" required>
+                </div>
+
+                <button type="submit">Save Changes</button>
+              </form>
+            </div>
+       <footer>
+            <div class="footer-section">  
+              <div class="footer-line1">
+                <br><br><br><br><br>
+                <h3>About Us</h3>
+                <br>
+                <h3>Programers</h3>
+                <br>
+                <h3>Events</h3>
+                <br>
+                <h3>Blog</h3>
+                <br>
+                <h3>Join our Team</h3>
+                <br>
+                <div class="outerwraperimg">
+                <div class="image-twitter "></div>
+                <div class="image-instagram"></div>
+                </div>
+              </div>
+              <div class="linediv1"></div>
+
+               <div class="footer-line2">
+                <h1 class="heading-updates"> Get Updates  </h1>
+                <p class="footer-bottomline"> We've cleaned up the clutter—one small click for a tidier web, one big step for a cleaner Earth</p>
+                <form class="subscribe-form">
+                   <div class="outerdivformaIL"> <input class="email-footer" type="email" placeholder="*Email" required>
+                     <button class="email-footer-button" type="submit">Subscribe</button>
+                
+                     </div>
+                     <div class="outerdivforUsername">
+                     <input class="username-footer " type="text" placeholder="*Username" required>
+                    
+                     </div>
+                </form>
+            </div>
+               <div class="linediv2"></div>
+                <div class="footer-line3">
+                    <p class="SendUsAMessage-footer" > Send Us A Message</p>
+                    <p class="developerfrom-footer"> Developers From :</p>
+                    
+                    <p> Punjab</p>
+                    <div class="imglogo-fotter"></div>
+                </div>
+            </div>
+        <div class="lastoutline-footer">
+            <div class="lastoutline-footer-text">
+<p >© 2024 ECOSPHERE. All rights reserved.</p>
+            </div>
+        </div>
         </footer>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

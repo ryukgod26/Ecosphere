@@ -20,7 +20,7 @@ residentLoginRouter.get(
 
 
 residentLoginRouter.post(
-  "/", passport.authenticate("local", {
+  "/", passport.authenticate("resident-local", {
     successRedirect: "/resident",       
     failureRedirect: "/residentLogin",  
     failureFlash: true                  

@@ -65,7 +65,7 @@ app.post("/chat", async (req, res) => {
 // ====== ROUTES (order matters) ======
 app.use("/", homeRouter);
 app.use("/cleaner", cleanerRouter);
-app.use("/resident", residentRouter); // multer route must come before body parsers
+app.use("/resident", residentRouter);
 app.use("/cleanerLogin", cleanerloginRouter);
 app.use("/residentLogin", residentloginRouter);
 app.use("/cleanerRegister", cleanerRegisterRouter);

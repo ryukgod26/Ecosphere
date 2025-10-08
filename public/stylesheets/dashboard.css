@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 10vh;
-  background-color:#808F69;
+  background-color:#D4F3B7;
 }
 #mpg1-container{
   height:100%;
@@ -108,4 +108,84 @@
 }
 #submit:hover{
   background-color: rgb(8, 89, 1);
+}
+
+#editFeature
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2vh;
+  height:auto;
+  width: 100vw;
+}
+#editFeature h2{
+  color: #3A4630;
+  font-weight: 900;
+}
+#editFeature form{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2vh;
+}
+#editFeature input, #editFeature button{
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  text-align: start;
+  padding:0.5% 1%;
+}
+#editFeature button{
+  height: auto;
+  width: fit-content;
+  padding: 1% 2%;
+  background-color: #3A4630;
+  color:white;
+  font-weight: 900;
+  border-radius: 2px;
+}
+#mpage2
+{
+  background-color:#D4F3B7;
+  padding: 4% 1%;
+}
+#editFeature input:active{
+  border: none;
+}
+
+@media (max-width: 900px) {
+
+#editFeature form{
+  width: 100%;
+}
+.label2{
+  gap: 4vh;
+}
+#reportForm {
+  height:fit-content;
+  padding: 5% 4%;
+  width:80vw;
+  gap:4vh;
+}
+#label{
+  gap: 1vh;
+  padding: 3% 1%;
+}
+#reportForm h2{
+  font-size: 2vh;
+  margin-bottom: 2vh;
+}
+#markForm{
+  padding: 2% 0;
+  gap:2vh;
+}
+#markForm input{
+  width: 100%;
+  font-size: 1vh;
+}
 }

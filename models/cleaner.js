@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-    fullName: { type: String, required: true },
-    mobile: { type: String, required: true },
-    locality: { type: String, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    fullName: { type: String,  },
+    mobile: { type: String,  },
+    locality: { type: String,  },
+    city: { type: String,  },
+    state: { type: String,},
+    username: { type: String, unique: true },
+    password: { type: String,  },
 });
 
 module.exports = mongoose.model("cleaner", UserSchema);

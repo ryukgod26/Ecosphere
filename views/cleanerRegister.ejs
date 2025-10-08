@@ -28,25 +28,97 @@
                 <h1>Cleaner Register</h1>
                 <div id="contact-pg4">
                     <div class="contact-container">
-                        <form action="/cleanerRegister" method="POST" class="contact-left">
-                            <input type="text" name="fullName" placeholder="Full Name" value="<%= typeof fullName != 'undefined' ? fullName : '' %>" required><br>
-                            <input type="text" name="mobile" placeholder="Mobile" value="<%= typeof mobile != 'undefined' ? mobile : '' %>" required><br>
-                            <input type="text" name="locality" placeholder="Locality" value="<%= typeof locality != 'undefined' ? locality : '' %>" required><br>
-                            <input type="text" name="city" placeholder="City" value="<%= typeof city != 'undefined' ? city : '' %>" required><br>
-                            <input type="text" name="state" placeholder="State" value="<%= typeof state != 'undefined' ? state : '' %>" required><br>
-                            <input type="text" name="username" placeholder="Username" value="<%= typeof username != 'undefined' ? username : '' %>" required><br>
-                            <input type="password" name="password" placeholder="Password" required><br>
-                            <input type="password" name="password2" placeholder="Confirm Password" required><br>
-
+                        <form action="/residentRegister" method="POST" class="contact-left">
+                            <div id="label">
+                                <label for="fullName">Name:</label>
+                                <input type="text" name="fullName" placeholder="Full Name" value="<%= typeof fullName != 'undefined' ? fullName : '' %>" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="mobile">Mobile:</label>
+                                <input type="text" name="mobile" placeholder="Mobile" value="<%= typeof mobile != 'undefined' ? mobile : '' %>" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="locality">locality:</label>
+                                <input type="text" name="locality" placeholder="Locality" value="<%= typeof locality != 'undefined' ? locality : '' %>" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="city">City:</label>
+                                <input type="text" name="city" placeholder="City" value="<%= typeof city != 'undefined' ? city : '' %>" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="punjab">Punjab:</label>
+                                <input type="text" name="state" placeholder="State" value="<%= typeof state != 'undefined' ? state : '' %>" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" placeholder="Username" value="<%= typeof username != 'undefined' ? username : '' %>" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="password1">Password1:</label>
+                                <input type="password" name="password" placeholder="Password" required><br>
+                            </div>
+                            <div id="label">
+                                <label for="password2">Password2:</label>
+                                <input type="password" name="password2" placeholder="Confirm Password" required><br>
+                            </div>
                             <button type="submit">Register</button>
                         </form>
                     </div>
-                     <h2>Already have an account? <a href="/cleanerLogin">Login</a></h2>
+                    <div class="bottomLinks">
+                        <a href="/cleanerLogin">Already Registered? Click Here...</a>
+                    </div>
                 </div>
             </div>
         </div>
         <footer>
-            <h2>©️2025 TEAM AVENGERS</h2>
+            <div class="footer-section">  
+              <div class="footer-line1">
+                <br><br><br><br><br>
+                <h3>About Us</h3>
+                <br>
+                <h3>Programers</h3>
+                <br>
+                <h3>Events</h3>
+                <br>
+                <h3>Blog</h3>
+                <br>
+                <h3>Join our Team</h3>
+                <br>
+                <div class="outerwraperimg">
+                <div class="image-twitter "></div>
+                <div class="image-instagram"></div>
+                </div>
+              </div>
+              <div class="linediv1"></div>
+
+               <div class="footer-line2">
+                <h1 class="heading-updates"> Get Updates  </h1>
+                <p class="footer-bottomline"> We've cleaned up the clutter—one small click for a tidier web, one big step for a cleaner Earth</p>
+                <form class="subscribe-form">
+                   <div class="outerdivformaIL"> <input class="email-footer" type="email" placeholder="*Email" required>
+                     <button class="email-footer-button" type="submit">Subscribe</button>
+                
+                     </div>
+                     <div class="outerdivforUsername">
+                     <input class="username-footer " type="text" placeholder="*Username" required>
+                    
+                     </div>
+                </form>
+            </div>
+               <div class="linediv2"></div>
+                <div class="footer-line3">
+                    <p class="SendUsAMessage-footer" > Send Us A Message</p>
+                    <p class="developerfrom-footer"> Developers From :</p>
+                    
+                    <p> Punjab</p>
+                    <div class="imglogo-fotter"></div>
+                </div>
+            </div>
+        <div class="lastoutline-footer">
+            <div class="lastoutline-footer-text">
+<p >© 2024 ECOSPHERE. All rights reserved.</p>
+            </div>
+        </div>
         </footer>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
