@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     state: { type: String,},
     username: { type: String, unique: true },
     password: { type: String,  },
+    googleId: { type: String },
 });
 
 module.exports = mongoose.model("cleaner", UserSchema);
