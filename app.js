@@ -14,7 +14,7 @@ const chat = require("./routes/cerabas");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ====== MIDDLEWARES ======
+
 app.use(cookieParser());
 app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
@@ -46,11 +46,11 @@ const residentRouter = require("./routes/resident");
 const markLocationRouter = require("./routes/locationMark");
 const reviewRoute = require("./routes/reviewRoute");
 
-// ====== STATIC + VIEW ENGINE ======
+
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
-// ====== CHAT ROUTE ======
+
 app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
@@ -62,7 +62,7 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// ====== ROUTES (order matters) ======
+
 app.use("/", homeRouter);
 app.use("/cleaner", cleanerRouter);
 app.use("/resident", residentRouter);
@@ -73,11 +73,10 @@ app.use("/residentRegister", residentRegisterRouter);
 app.use("/markLocation", markLocationRouter);
 app.use("/reviewRoute", reviewRoute);
 
-// ====== BODY PARSERS (after upload routes) ======
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/uploads", express.static("uploads"));
 
-// ====== SERVER ======
+
 app.listen(3000);
