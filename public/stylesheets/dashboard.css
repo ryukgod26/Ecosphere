@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 10vh;
-  background-color:#D4F3B7;
+  background-color:#E0E0E0;
 }
 #mpg1-container{
   height:100%;
@@ -14,12 +14,11 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color:#D4F3B7;
 }
 #map { 
   height: 80vh; 
   width: 100vw;
-  display: flex;
+  display: flex;  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -151,8 +150,9 @@
 }
 #mpage2
 {
-  background-color:#D4F3B7;
+  background-color:#E0E0E0;
   padding: 4% 1%;
+  border: none;
 }
 #editFeature input:active{
   border: none;

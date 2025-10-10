@@ -53,9 +53,10 @@
             <div id="editFeature">
               <h2>Edit Your Details</h2>
               <form action="/resident/edit-details/" method="POST">
+                <input type="hidden" name="userId" value="<%= resident.username%>" >
                 <div id="label" class="label2">
                   <label>Full Name:</label>
-                <input type="text" name="fullName" value="<%= resident.fullName || '' %>" required>
+                  <input type="text" name="fullName" value="<%= resident.fullName || '' %>" required>
                 </div>
 
               <div id="label" class="label2">
@@ -82,8 +83,6 @@
               </form>
             </div>
         </div>
-        <div class="line"></div>
-  
         <footer>
             <div id="footer-bg">
                 <img src="/images/footer-bg3.png" alt="">

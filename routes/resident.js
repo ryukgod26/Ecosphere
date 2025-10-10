@@ -13,7 +13,7 @@ residentRouter.get("/", async (req, res) => {
     const cleanedAreas = await GarbageReport.find({});
     res.render("resident", {
       resident: { fullName: userName, mobile: req.user?.mobile || "N/A" },
-      cleanedAreas, // pass all reports to EJS
+      cleanedAreas,
     });
   } catch (err) {
     console.error(err);
@@ -22,13 +22,14 @@ residentRouter.get("/", async (req, res) => {
 });
   residentRouter.post("/edit-details/", async (req, res) => {
     try {
-      const { fullName, mobile, locality, city, state } = req.body;
-      await Resident.findByIdAndUpdate(req.params.id, {
-        fullName,
-        mobile,
-        locality,
-        city,
-        state,
+      const { fullName, mobile, locality, city, state,userId } = req.body;
+      console.log(userId);
+      await Resident.findOneAndUpdate({username:userId}, {
+        fullName:fullName,
+        mobile:mobile,
+        locality:locality,
+        city:city,
+        state:state,
       });
       res.redirect("/resident");
     } catch (err) {

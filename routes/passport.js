@@ -5,12 +5,12 @@ const bcrypt = require("bcrypt");
 const Resident = require("../models/resident");
 const Cleaner = require("../models/cleaner");
 
-// 🔹 Serialize user
+
 passport.serializeUser((user, done) => {
   done(null, { id: user.id, role: user.role });
 });
 
-// 🔹 Deserialize user
+
 passport.deserializeUser(async (obj, done) => {
   try {
     let user;
@@ -23,9 +23,9 @@ passport.deserializeUser(async (obj, done) => {
 });
 
 
-// ==================== LOCAL STRATEGIES ====================
 
-// Resident Login
+
+
 passport.use(
   "resident-local",
   new LocalStrategy({ usernameField: "username" }, async (username, password, done) => {
@@ -44,7 +44,7 @@ passport.use(
   })
 );
 
-// Cleaner Login
+
 passport.use(
   "cleaner-local",
   new LocalStrategy({ usernameField: "username" }, async (username, password, done) => {
@@ -64,9 +64,7 @@ passport.use(
 );
 
 
-// ==================== GOOGLE STRATEGIES ====================
 
-// Resident Google Login
 passport.use(
   "resident-google",
   new GoogleStrategy(
@@ -95,7 +93,7 @@ passport.use(
   )
 );
 
-// Cleaner Google Login
+
 passport.use(
   "cleaner-google",
   new GoogleStrategy(

@@ -6,13 +6,13 @@ const passport = require("../routes/passport");
 // start Google OAuth
 cleanerLoginRouter.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("cleaner-google", { scope: ["profile", "email"] })
 );
 
 // Google OAuth callback
 cleanerLoginRouter.get(
   "/auth/google/callback",
-  passport.authenticate("google", {
+  passport.authenticate("cleaner-google", {
     successRedirect: "/cleaner",
     failureRedirect: "/cleanerLogin",
     failureFlash: true
