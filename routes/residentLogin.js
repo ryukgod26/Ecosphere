@@ -2,13 +2,13 @@ const express = require("express");
 const passport = require("../routes/passport");
 const residentLoginRouter = express.Router();
 
-// start Google OAuth
+
 residentLoginRouter.get(
   "/auth/google",
   passport.authenticate("resident-google", { scope: ["profile", "email"] })
 );
 
-// Google OAuth callback
+
 residentLoginRouter.get(
   "/auth/google/callback",
   passport.authenticate("resident-google", {

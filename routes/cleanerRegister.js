@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/cleaner");
 
 
-// Handle cleaner Registration
+
 router.post("/", async (req, res) => {
     const { fullName, mobile, locality, city, state, username, password, password2 } = req.body;
     let errors = [];

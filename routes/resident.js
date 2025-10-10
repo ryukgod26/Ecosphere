@@ -1,4 +1,3 @@
-// routes/resident.js
 const express = require("express");
 const residentRouter = express.Router();
 const GarbageReport = require("../models/garbageReport");
@@ -6,7 +5,7 @@ const {pictures} = require("../config/cloudinaryUpload");
 const Review = require("../models/review");
 const Resident =  require('../models/resident');
 
-// Render dashboard
+
 residentRouter.get("/", async (req, res) => {
   try {
      const userName = req.user?.fullName || req.user?.username || "Guest";
