@@ -8,16 +8,12 @@ const User = require("../models/cleaner");
 router.post("/", async (req, res) => {
     const { fullName, mobile, locality, city, state, username, password, password2 } = req.body;
     let errors = [];
-
-    if (!fullName || !mobile || !locality || !city || !state || !username || !password || !password2) {
-        errors.push({ msg: "Please enter all fields" });
-    }
     if (password !== password2) errors.push({ msg: "Passwords do not match" });
 
     if (errors.length > 0) {
         return res.render("/cleanerRegister", { errors, fullName, mobile, locality, city, state, username });
     }
-
+    
     try {
         let user = await User.findOne({ username });
         if (user) {
