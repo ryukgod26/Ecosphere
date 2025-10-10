@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     if (password !== password2) errors.push({ msg: "Passwords do not match" });
 
     if (errors.length > 0) {
-        return res.render("/cleanerRegister", { errors, fullName, mobile, locality, city, state, username });
+        return res.render("cleanerRegister", { errors, fullName, mobile, locality, city, state, username });
     }
     if (!fullName || !mobile || !locality || !city || !state || !username || !password || !password2) {
         errors.push({ msg: "Please enter all fields" });
