@@ -13,7 +13,9 @@ router.post("/", async (req, res) => {
     if (errors.length > 0) {
         return res.render("/cleanerRegister", { errors, fullName, mobile, locality, city, state, username });
     }
-    
+    if (!fullName || !mobile || !locality || !city || !state || !username || !password || !password2) {
+        errors.push({ msg: "Please enter all fields" });
+    }
     try {
         let user = await User.findOne({ username });
         if (user) {
