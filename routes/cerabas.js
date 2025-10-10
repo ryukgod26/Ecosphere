@@ -28,9 +28,9 @@ async function chat(message = '') {
 
     try {
         const response = await axios.post(url, data, { headers });
-        return response.data; // ✅ Return the actual data from the API
+        return response.data; 
     } catch (error) {
-        // Log detailed info for debugging
+        
         if (error.response) {
             console.error('API Error:', error.response.data);
             throw new Error(`API Error: ${error.response.data.error?.message || 'Unknown error'}`);

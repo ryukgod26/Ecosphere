@@ -3,13 +3,13 @@ const cleanerLoginRouter=express.Router();
 const passport = require("../routes/passport");
 
 
-// start Google OAuth
+
 cleanerLoginRouter.get(
   "/auth/google",
   passport.authenticate("cleaner-google", { scope: ["profile", "email"] })
 );
 
-// Google OAuth callback
+
 cleanerLoginRouter.get(
   "/auth/google/callback",
   passport.authenticate("cleaner-google", {

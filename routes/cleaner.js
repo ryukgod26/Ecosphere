@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// API: Fetch all reports
+
 router.get("/api/reports", async (req, res) => {
   try {
     const reports = await GarbageReport.find();
@@ -29,7 +29,7 @@ router.get("/api/reports", async (req, res) => {
   }
 });
 
-// API: Mark cleaned
+
 router.post("/api/mark-cleaned/:id", async (req, res) => {
   try {
     const report = await GarbageReport.findById(req.params.id);
