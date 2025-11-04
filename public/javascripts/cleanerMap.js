@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     {
       attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, IGN, and GIS User Community'
-    }
+    } 
   );
 
   // === Initialize map ===

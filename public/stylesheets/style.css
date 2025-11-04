@@ -127,7 +127,7 @@ nav{
     justify-content: center;
     margin-top: 10vh;
     position: relative;
-    background-image: url(https://images.pexels.com/photos/4840134/pexels-photo-4840134.jpeg);
+    background-clip: url(../);
     background-position: center;
     background-size: cover;
 }
