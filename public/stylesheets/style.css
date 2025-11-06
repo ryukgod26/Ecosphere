@@ -127,7 +127,7 @@ nav{
     justify-content: center;
     margin-top: 10vh;
     position: relative;
-    background-clip: url(../);
+    background: url(../images/bg.jpeg);
     background-position: center;
     background-size: cover;
 }

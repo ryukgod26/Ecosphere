@@ -35,7 +35,8 @@
         </div>
         <div id="editFeature">
               <h2>Edit Your Details</h2>
-              <form action="/cleaner/edit-details/" method="POST">
+              <form action="/cleaner/edit-details" method="POST">
+                <input type="hidden" name="userId" value="<%= cleaner.username%>" >
                 <div id="label" class="label2">
                   <label>Full Name:</label>
                 <input type="text" name="fullName" value="<%= cleaner.fullName || '' %>" required>

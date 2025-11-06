@@ -11,7 +11,7 @@ residentRouter.get("/", async (req, res) => {
      const userName = req.user?.fullName || req.user?.username || "Guest";
     const cleanedAreas = await GarbageReport.find({});
     res.render("resident", {
-      resident: { fullName: userName, mobile: req.user?.mobile || "N/A" },
+      resident: req.user,
       cleanedAreas,
     });
   } catch (err) {
@@ -22,7 +22,6 @@ residentRouter.get("/", async (req, res) => {
   residentRouter.post("/edit-details/", async (req, res) => {
     try {
       const { fullName, mobile, locality, city, state,userId } = req.body;
-      console.log(userId);
       await Resident.findOneAndUpdate({username:userId}, {
         fullName:fullName,
         mobile:mobile,

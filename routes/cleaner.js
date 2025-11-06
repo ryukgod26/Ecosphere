@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
        const userName = req.user?.fullName || req.user?.username || "Guest";
       const cleanedAreas = await GarbageReport.find({});
       res.render("cleaner", {
-        cleaner: { fullName: userName, mobile: req.user?.mobile || "Guest" },
+        cleaner:req.user,
         cleanedAreas,
       });
     } catch (err) {
@@ -44,10 +44,10 @@ router.post("/api/mark-cleaned/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update report status" });
   }
 });
-router.post("/edit-details/", async (req, res) => {
+router.post("/edit-details", async (req, res) => {
     try {
-      const { fullName, mobile, locality, city, state } = req.body;
-      await cleaner.findByIdAndUpdate(req.params.id, {
+      const { fullName, mobile, locality, city, state,userId} = req.body;
+      await cleaner.findOneAndUpdate({username:userId}, {
         fullName,
         mobile,
         locality,
