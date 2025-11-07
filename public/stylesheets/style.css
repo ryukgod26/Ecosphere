@@ -12,6 +12,7 @@ main{
     height: auto;
     width: 100%;
     overflow-x: hidden;
+    background-color: #E8F5E9;
 }
 #chatPage
 {
@@ -84,7 +85,8 @@ nav{
     justify-content: space-between;
     align-items: center;
     padding: 0 2%;
-    background-color:#505c45;
+    background-color:#505c4597;
+    backdrop-filter: blur(10px);
     z-index: 999;
 }
 .nl{
@@ -125,7 +127,6 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10vh;
     position: relative;
     background: url(../images/bg.jpeg);
     background-position: center;
@@ -162,10 +163,11 @@ nav{
 #header
 {
     height:100%;
-    width: 80%;
+    width: 100%;
     display:flex;
     align-items: center;
     justify-content: center;
+  
 }
 #header h1{
     font-weight: 900;
@@ -498,6 +500,89 @@ footer h3,footer a{
 .footer-line2 h1{
     font-size: 6vh;
     color: #e0e0e0;
+}
+
+
+/* Container MUST have a height */
+.carousel {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Each slide */
+.carousel-cell {
+  width: 100%;
+  height: 100%;
+}
+
+/* Image fills the entire slide */
+.carousel-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; /* remove white gaps */
+}
+
+
+#pictures
+{
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+#marqueue1
+{
+    height: 30vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px #2E3320;
+}
+#picture-blur-left
+{
+    height:30vh;
+    width: 10vw;
+    background: linear-gradient(to left,#e0e0e0,transparent);
+    transform: translateX(20%);
+}
+#picture-blur-right
+{
+    height:30vh;
+    width: 10vw;
+    background: linear-gradient(to right,#e0e0e0,transparent);
+    transform: translateX(-20%);
+}
+#marqueue2{
+    height: 30vh;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    animation-name: movement;
+    animation-timing-function: linear;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+#marqueue2 img{
+    height: 100%;
+    width: 40vw;
+    object-fit: cover;
+    object-position: center;
+}
+
+@keyframes movement{
+    0%{
+        transform: translate(0);
+    }
+    100%{
+        transform: translate(-200%);
+    }
 }
 @media (max-width: 900px) {
   nav {

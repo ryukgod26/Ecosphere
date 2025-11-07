@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
 
   const map = L.map('map', {
-    center: [20.5937, 78.9629], // default India center
+    center: [20.5937, 78.9629], 
     zoom: 5,
     layers: [streetMap]
   });
@@ -26,15 +26,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 if (window.residentData?.locality) placeParts.push(window.residentData.locality);
 if (window.residentData?.city) placeParts.push(window.residentData.city);
 if (window.residentData?.state) placeParts.push(window.residentData.state);
-placeParts.push("India"); // always append country
+placeParts.push("India"); 
 const placeQuery = placeParts.join(", ");
 const coords = await getCoordinates(placeQuery);
 if (coords) map.setView(coords, 14);
-  // === Function to get coordinates from Nominatim ===
+
   async function getCoordinates(placeName) {
   if (!placeName) return null;
   try {
-    // Force search within India
+   
     const res = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(placeName + ", India")}&limit=1`
     );
@@ -50,7 +50,7 @@ if (coords) map.setView(coords, 14);
 
 
 
-  // === Click to add marker ===
+
   map.on('click', e => {
     const { lat, lng } = e.latlng;
 
@@ -65,7 +65,7 @@ if (coords) map.setView(coords, 14);
     document.getElementById('reportForm').style.display = 'block';
   });
 
-  // === Close form and remove marker ===
+
   window.closeForm = function() {
     document.getElementById('reportForm').style.display = 'none';
     if (currentMarker) {
@@ -74,7 +74,7 @@ if (coords) map.setView(coords, 14);
     }
   };
 
-  // === Submit the report ===
+
   document.getElementById('markForm').addEventListener('submit', async e => {
     e.preventDefault();
 
@@ -83,6 +83,7 @@ if (coords) map.setView(coords, 14);
       return;
     }
 
+    
     const formData = new FormData();
     formData.append("lat", document.getElementById('lat').value);
     formData.append("lng", document.getElementById('lng').value);
@@ -99,7 +100,7 @@ if (coords) map.setView(coords, 14);
       const data = await response.json();
       if (data.success) {
         alert("Area reported successfully!");
-        closeForm(); // remove marker only after successful submission
+        closeForm(); 
       } else {
         alert("Error: " + data.message);
       }
@@ -108,10 +109,9 @@ if (coords) map.setView(coords, 14);
       alert("Something went wrong while submitting report.");
     }
   });
-
-  // === Load existing reports as markers (optional) ===
+  
   try {
-    const res = await fetch("/resident/api/reports"); // create this route if needed
+    const res = await fetch("/resident/api/reports");
     const reports = await res.json();
     reports.forEach(r => {
       if (r.status === "Pending") {

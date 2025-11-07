@@ -27,6 +27,8 @@
         </nav>
         <div id="mpage1">
           <div id="mpg1-container">
+            <h2>Resident Portal</h2>
+            <br><br>
             <h2>Welcome, <%= resident.fullName %></h2>
             <div id="map"></div>
           </div>
@@ -83,6 +85,13 @@
               </form>
             </div>
         </div>
+        <div id="customPopup" class="popup">
+          <div class="popup-content">
+            <p id="popupMessage"></p>
+            <button onclick="closePopup()">OK</button>
+          </div>
+        </div>
+
         <footer>
             <div id="footer-bg">
                 <img src="/images/footer-bg3.png" alt="">
