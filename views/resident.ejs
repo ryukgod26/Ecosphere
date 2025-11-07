@@ -118,186 +118,61 @@
       </div>
     </div>
 
-    <footer>
-      <div id="footer-bg">
-        <img src="/images/footer-bg3.png" alt="">
-      </div>
-      <div class="footer-section">
-        <div class="footer-line1">
-          <br><br><br><br><br>
-          <a href="#aboutPage">About Us</a>
-          <br>
-          <br>
-          <a href="#page2">Links</a>
-          <br>
-          <br>
-          <a href="#page3">Contact Us</a>
-          <br>
-          <br>
-          <br>
-          <br>
-          <div class="outerwraperimg">
-            <div class="image-twitter"></div>
-            <div class="image-instagram"></div>
-          </div>
-        </div>
-        <div class="linediv1"></div>
-        <div class="footer-line2">
-          <h1 class="heading-updates"> Get Updates </h1>
-          <p class="footer-bottomline"> We've cleaned up the clutter—one small click for a tidier web, one big step for
-            a cleaner Earth</p>
-        </div>
-        <div class="linediv2"></div>
-        <div class="footer-line3">
-          <p class="SendUsAMessage-footer"></p>
-          <p class="developerfrom-footer">Team AESTA</p>
-          <div class="imglogo-fotter"></div>
-        </div>
-      </div>
-      <div class="lastoutline-footer">
-        <div class="lastoutline-footer-text">
-          <p>© 2025 Team AESTA. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-  </main>
-  <script>
-    window.residentData = {
-      locality: "<%= resident.locality %>",
-      city: "<%= resident.city %>",
-      state: "<%= resident.state %>"
-    };
-    
-  </script>
-<script>
-  (function () {
-    const startCameraBtn = document.getElementById('startCamera');
-    const captureBtn = document.getElementById('captureBtn');
-    const stopCameraBtn = document.getElementById('stopCamera');
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const preview = document.getElementById('preview');
-    const fileInput = document.getElementById('fileInput');
-    const markForm = document.getElementById('markForm');
-    const latEl = document.getElementById('lat');
-    const lngEl = document.getElementById('lng');
-    const popup = document.getElementById('customPopup');
-    const popupMessage = document.getElementById('popupMessage');
+        <footer>
+            <div id="footer-bg">
+                <img src="/images/footer-bg3.png" alt="">
+            </div>
+            <div class="footer-section">  
+                <div class="footer-line1">
+                    <br><br><br><br><br>
+                    <a href="#aboutPage">About Us</a>
+                    <br>
+                    <br>
+                    <a href="#page2">Links</a>
+                    <br>
+                    <br>
+                    <a href="#page3">Contact Us</a>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="outerwraperimg">
+                        <div class="image-twitter"></div>
+                        <div class="image-instagram"></div>
+                    </div>
+                </div>
+                <div class="linediv1"></div>
+                <div class="footer-line2">
+                    <h1 class="heading-updates"> Get Updates  </h1>
+                    <p class="footer-bottomline"> We've cleaned up the clutter—one small click for a tidier web, one big step for a cleaner Earth</p>
+                </div>
+                <div class="linediv2"></div>
+                <div class="footer-line3">
+                    <p class="SendUsAMessage-footer" ></p>
+                    <p class="developerfrom-footer">Team AESTA</p>
+                    <div class="imglogo-fotter"></div>
+                </div>
+            </div>
+            <div class="lastoutline-footer">
+                <div class="lastoutline-footer-text">
+                    <p >© 2025 Team AESTA. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script>
+      window.residentData = {
+        locality: "<%= resident.locality %>",
+        city: "<%= resident.city %>",
+        state: "<%= resident.state %>"
+      };
+    </script>
 
-    let stream = null;
-    let capturedBlob = null;
-
-    async function startCamera() {
-      try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
-        video.srcObject = stream;
-        captureBtn.disabled = false;
-        stopCameraBtn.disabled = false;
-        startCameraBtn.disabled = true;
-      } catch (err) {
-        console.error('Camera error', err);
-        alert('Unable to access camera: ' + (err.message || err));
-      }
-    }
-
-    function stopCamera() {
-      if (!stream) return;
-      stream.getTracks().forEach(t => t.stop());
-      video.srcObject = null;
-      stream = null;
-      captureBtn.disabled = true;
-      stopCameraBtn.disabled = true;
-      startCameraBtn.disabled = false;
-    }
-
-    function capture() {
-      if (!stream) return;
-      canvas.width = video.videoWidth || 320;
-      canvas.height = video.videoHeight || 240;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob((blob) => {
-        capturedBlob = blob;
-        preview.src = URL.createObjectURL(blob);
-      }, 'image/jpeg', 0.9);
-    }
-
-    startCameraBtn.addEventListener('click', startCamera);
-    stopCameraBtn.addEventListener('click', stopCamera);
-    captureBtn.addEventListener('click', capture);
-
-    // if user chooses file fallback, clear capturedBlob and show preview
-    fileInput.addEventListener('change', () => {
-      capturedBlob = null;
-      const f = fileInput.files[0];
-      if (f) preview.src = URL.createObjectURL(f);
-    });
-
-    // show popup helper
-    function showPopup(msg) {
-      popupMessage.textContent = msg;
-      popup.style.display = 'block';
-    }
-
-    // close popup (existing button calls closePopup() in file; ensure consistent)
-    window.closePopup = function() {
-      document.getElementById('customPopup').style.display = 'none';
-    };
-
-    // markForm submit -> send via fetch to /garbage/report
-    markForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // collect lat/lng (your residentMap.js should fill these)
-      const lat = latEl.value;
-      const lng = lngEl.value;
-      if (!lat || !lng) {
-        showPopup('Please select/mark a location on the map first.');
-        return;
-      }
-
-      const form = new FormData();
-      form.append('lat', lat);
-      form.append('lng', lng);
-
-      if (capturedBlob) {
-        form.append('photo', capturedBlob, 'capture.jpg');
-      } else if (fileInput.files && fileInput.files[0]) {
-        form.append('photo', fileInput.files[0]);
-      } else {
-        showPopup('Please capture a photo or choose a file.');
-        return;
-      }
-
-      try {
-        const res = await fetch('/garbage/report', { method: 'POST', body: form });
-        if (!res.ok) {
-          const err = await res.json().catch(()=>({error:res.statusText}));
-          throw new Error(err.error || res.statusText);
-        }
-        const body = await res.json();
-        stopCamera();
-        capturedBlob = null;
-        fileInput.value = '';
-        preview.src = body.report?.image || '';
-        showPopup('Report uploaded successfully.');
-      } catch (err) {
-        console.error(err);
-        showPopup('Upload failed: ' + (err.message || 'server error'));
-      }
-    });
-  })();
-</script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="/javascripts/residentMap.js"></script>
-  <script src="/javascripts/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="/javascripts/residentMap.js"></script>
+    <script src="/javascripts/script.js"></script>
 </body>
 
 </html>

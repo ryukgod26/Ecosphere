@@ -1,5 +1,24 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  // === Base Layers ===
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        map.setView([lat, lng], 15); 
+        
+        L.marker([lat, lng]).addTo(map).bindPopup("You are here").openPopup();
+      },
+      function(error) {
+        
+        if (coords) map.setView(coords, 14);
+      }
+    );
+  } else {
+    
+    if (coords) map.setView(coords, 14);
+  }
+  
   const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
   });
@@ -11,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } 
   );
 
-  // === Initialize map ===
+ 
   const map = L.map('map', {
     center: [31.63, 74.87],
     zoom: 14,
@@ -20,13 +39,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   L.control.layers({ "Street Map": streetMap, "Satellite": satelliteMap }, null, { collapsed: false }).addTo(map);
 
-  // === Fetch and display pending reports ===
+ 
   async function loadReports() {
     try {
       const res = await fetch("/cleaner/api/reports");
       const reports = await res.json();
 
-      // Remove all existing markers
+      
       if (window.reportMarkers) {
         window.reportMarkers.forEach(m => map.removeLayer(m));
       }
@@ -59,7 +78,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await loadReports();
 
-  // === Handle Mark as Cleaned ===
   document.addEventListener("click", async (e) => {
     if (e.target.classList.contains("markCleanedBtn")) {
       const reportId = e.target.getAttribute("data-id");
@@ -72,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await response.json();
         if (data.success) {
           alert("Marked as cleaned ✅");
-          await loadReports(); // Refresh map markers
+          await loadReports(); 
         } else {
           alert("Error: " + data.error);
         }

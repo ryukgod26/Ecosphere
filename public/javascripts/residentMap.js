@@ -1,4 +1,22 @@
 document.addEventListener("DOMContentLoaded", async () => {
+   if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        map.setView([lat, lng], 15); 
+        
+        L.marker([lat, lng]).addTo(map).bindPopup("You are here").openPopup();
+      },
+      function(error) {
+        
+        if (coords) map.setView(coords, 14);
+      }
+    );
+  } else {
+    
+    if (coords) map.setView(coords, 14);
+  }
   const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
   });
