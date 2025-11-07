@@ -1,151 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/dashboard.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <title>CLEAN INDIA | Resident Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/dashboard.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <title>CLEAN INDIA | Resident Dashboard</title>
 </head>
+
 <body>
-    <main>
-        <nav>
-            <div class="nl">
-                <img src="/images/logo.png" alt="">
+  <main>
+    <nav>
+      <div class="nl">
+        <img src="/images/logo.png" alt="">
+      </div>
+      <div class="nr">
+        <a href="/">HOME</a>
+        <a href="/residentLogin">RESIDENT</a>
+        <a href="/cleanerLogin">CLEANER</a>
+      </div>
+    </nav>
+    <div id="mpage1">
+      <div id="mpg1-container">
+        <h2>Resident Portal</h2>
+        <br><br>
+        <h2>Welcome, <%= resident.fullName %>
+        </h2>
+        <div id="map"></div>
+      </div>
+    </div>
+    <div id="mpage2">
+      <div id="reportForm">
+        <h2>Mark The Area For Cleaning.....</h2>
+        <form id="markForm">
+          <input type="hidden" id="name" value="<%= resident.fullName %>" />
+          <input type="hidden" id="mobile" value="<%= resident.mobile %>" />
+          <input type="hidden" id="lat" />
+          <input type="hidden" id="lng" />
+          <div id="camera-ui">
+            <label>Capture Image:</label><br>
+            <video id="video" autoplay playsinline width="320" height="240" style="background:#000"></video>
+            <canvas id="canvas" width="320" height="240" style="display:none"></canvas>
+            <img id="preview" alt="preview" style="display:block; max-width:320px; margin-top:8px;" />
+
+            <div style="margin-top:8px;">
+              <button type="button" id="startCamera">Start Camera</button>
+              <button type="button" id="captureBtn" disabled>Capture</button>
+              <button type="button" id="stopCamera" disabled>Stop Camera</button>
             </div>
-            <div class="nr">
-                <a href="/">HOME</a>
-                <a href="/residentLogin">RESIDENT</a>
-                <a href="/cleanerLogin">CLEANER</a>
+
+            <div style="margin-top:8px;">
+              <label>Or choose file (fallback):</label><br>
+              <input type="file" id="fileInput" accept="image/*" />
             </div>
-        </nav>
-        <div id="mpage1">
-          <div id="mpg1-container">
-            <h2>Resident Portal</h2>
-            <br><br>
-            <h2>Welcome, <%= resident.fullName %></h2>
-            <div id="map"></div>
+          </div>
+
+          <div id="label2" style="margin-top:12px;">
+            <button type="submit" id="submit">Submit</button>
+            <button type="button" onclick="closeForm()" id="cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div id="label">
+        <label>Upload Image:</label><br>
+        <input type="file" id="image" name="image" accept="image/*" required /><br><br>
+      </div>
+      <div id="label2">
+        <button type="submit" id="submit">Submit</button>
+        <button type="button" onclick="closeForm()" id="cancel">Cancel</button>
+      </div>
+      </form>
+    </div>
+    <div id="editFeature">
+      <h2>Edit Your Details</h2>
+      <form action="/resident/edit-details/" method="POST">
+        <input type="hidden" name="userId" value="<%= resident.username%>">
+        <div id="label" class="label2">
+          <label>Full Name:</label>
+          <input type="text" name="fullName" value="<%= resident.fullName || '' %>" required>
+        </div>
+
+        <div id="label" class="label2">
+          <label>Mobile:</label>
+          <input type="text" name="mobile" value="<%= resident.mobile || '' %>" required>
+
+        </div>
+        <div id="label" class="label2">
+          <label>Locality:</label>
+          <input type="text" name="locality" value="<%= resident.locality || '' %>" required>
+        </div>
+
+        <div id="label" class="label2">
+          <label>City:</label>
+          <input type="text" name="city" value="<%= resident.city || '' %>" required>
+        </div>
+
+        <div id="label" class="label2">
+          <label>State:</label>
+          <input type="text" name="state" value="<%= resident.state || '' %>" required>
+        </div>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+    </div>
+    <div id="customPopup" class="popup">
+      <div class="popup-content">
+        <p id="popupMessage"></p>
+        <button onclick="closePopup()">OK</button>
+      </div>
+    </div>
+
+    <footer>
+      <div id="footer-bg">
+        <img src="/images/footer-bg3.png" alt="">
+      </div>
+      <div class="footer-section">
+        <div class="footer-line1">
+          <br><br><br><br><br>
+          <a href="#aboutPage">About Us</a>
+          <br>
+          <br>
+          <a href="#page2">Links</a>
+          <br>
+          <br>
+          <a href="#page3">Contact Us</a>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class="outerwraperimg">
+            <div class="image-twitter"></div>
+            <div class="image-instagram"></div>
           </div>
         </div>
-        <div id="mpage2">
-          <div id="reportForm">
-              <h2>Mark The Area For Cleaning.....</h2>
-              <form id="markForm">
-                <input type="hidden" id="name" value="<%= resident.fullName %>" />
-                <input type="hidden" id="mobile" value="<%= resident.mobile %>" />
-                <input type="hidden" id="lat" />
-                <input type="hidden" id="lng" />
-
-                <div id="label">
-                  <label>Upload Image:</label><br>
-                  <input type="file" id="image" name="image" accept="image/*" required /><br><br>
-                </div>
-                <div id="label2">
-                  <button type="submit" id="submit">Submit</button>
-                  <button type="button" onclick="closeForm()" id="cancel">Cancel</button>
-                </div>
-              </form>
-            </div>
-            <div id="editFeature">
-              <h2>Edit Your Details</h2>
-              <form action="/resident/edit-details/" method="POST">
-                <input type="hidden" name="userId" value="<%= resident.username%>" >
-                <div id="label" class="label2">
-                  <label>Full Name:</label>
-                  <input type="text" name="fullName" value="<%= resident.fullName || '' %>" required>
-                </div>
-
-              <div id="label" class="label2">
-                <label>Mobile:</label>
-                <input type="text" name="mobile" value="<%= resident.mobile || '' %>" required>
-
-              </div>
-                <div id="label" class="label2">
-                  <label>Locality:</label>
-                <input type="text" name="locality" value="<%= resident.locality || '' %>" required>
-                </div>
-
-                <div id="label" class="label2">
-                  <label>City:</label>
-                <input type="text" name="city" value="<%= resident.city || '' %>" required>
-                </div>
-
-                <div id="label" class="label2">
-                  <label>State:</label>
-                <input type="text" name="state" value="<%= resident.state || '' %>" required>
-                </div>
-
-                <button type="submit">Save Changes</button>
-              </form>
-            </div>
+        <div class="linediv1"></div>
+        <div class="footer-line2">
+          <h1 class="heading-updates"> Get Updates </h1>
+          <p class="footer-bottomline"> We've cleaned up the clutter—one small click for a tidier web, one big step for
+            a cleaner Earth</p>
         </div>
-        <div id="customPopup" class="popup">
-          <div class="popup-content">
-            <p id="popupMessage"></p>
-            <button onclick="closePopup()">OK</button>
-          </div>
+        <div class="linediv2"></div>
+        <div class="footer-line3">
+          <p class="SendUsAMessage-footer"></p>
+          <p class="developerfrom-footer">Team AESTA</p>
+          <div class="imglogo-fotter"></div>
         </div>
+      </div>
+      <div class="lastoutline-footer">
+        <div class="lastoutline-footer-text">
+          <p>© 2025 Team AESTA. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+  <script>
+    window.residentData = {
+      locality: "<%= resident.locality %>",
+      city: "<%= resident.city %>",
+      state: "<%= resident.state %>"
+    };
+    
+  </script>
+<script>
+  (function () {
+    const startCameraBtn = document.getElementById('startCamera');
+    const captureBtn = document.getElementById('captureBtn');
+    const stopCameraBtn = document.getElementById('stopCamera');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const preview = document.getElementById('preview');
+    const fileInput = document.getElementById('fileInput');
+    const markForm = document.getElementById('markForm');
+    const latEl = document.getElementById('lat');
+    const lngEl = document.getElementById('lng');
+    const popup = document.getElementById('customPopup');
+    const popupMessage = document.getElementById('popupMessage');
 
-        <footer>
-            <div id="footer-bg">
-                <img src="/images/footer-bg3.png" alt="">
-            </div>
-            <div class="footer-section">  
-                <div class="footer-line1">
-                    <br><br><br><br><br>
-                    <a href="#aboutPage">About Us</a>
-                    <br>
-                    <br>
-                    <a href="#page2">Links</a>
-                    <br>
-                    <br>
-                    <a href="#page3">Contact Us</a>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="outerwraperimg">
-                        <div class="image-twitter"></div>
-                        <div class="image-instagram"></div>
-                    </div>
-                </div>
-                <div class="linediv1"></div>
-                <div class="footer-line2">
-                    <h1 class="heading-updates"> Get Updates  </h1>
-                    <p class="footer-bottomline"> We've cleaned up the clutter—one small click for a tidier web, one big step for a cleaner Earth</p>
-                </div>
-                <div class="linediv2"></div>
-                <div class="footer-line3">
-                    <p class="SendUsAMessage-footer" ></p>
-                    <p class="developerfrom-footer">Team AESTA</p>
-                    <div class="imglogo-fotter"></div>
-                </div>
-            </div>
-            <div class="lastoutline-footer">
-                <div class="lastoutline-footer-text">
-                    <p >© 2025 Team AESTA. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
-    </main>
-    <script>
-      window.residentData = {
-        locality: "<%= resident.locality %>",
-        city: "<%= resident.city %>",
-        state: "<%= resident.state %>"
-      };
-    </script>
+    let stream = null;
+    let capturedBlob = null;
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="/javascripts/residentMap.js"></script>
-    <script src="/javascripts/script.js"></script>
+    async function startCamera() {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+        video.srcObject = stream;
+        captureBtn.disabled = false;
+        stopCameraBtn.disabled = false;
+        startCameraBtn.disabled = true;
+      } catch (err) {
+        console.error('Camera error', err);
+        alert('Unable to access camera: ' + (err.message || err));
+      }
+    }
+
+    function stopCamera() {
+      if (!stream) return;
+      stream.getTracks().forEach(t => t.stop());
+      video.srcObject = null;
+      stream = null;
+      captureBtn.disabled = true;
+      stopCameraBtn.disabled = true;
+      startCameraBtn.disabled = false;
+    }
+
+    function capture() {
+      if (!stream) return;
+      canvas.width = video.videoWidth || 320;
+      canvas.height = video.videoHeight || 240;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob((blob) => {
+        capturedBlob = blob;
+        preview.src = URL.createObjectURL(blob);
+      }, 'image/jpeg', 0.9);
+    }
+
+    startCameraBtn.addEventListener('click', startCamera);
+    stopCameraBtn.addEventListener('click', stopCamera);
+    captureBtn.addEventListener('click', capture);
+
+    // if user chooses file fallback, clear capturedBlob and show preview
+    fileInput.addEventListener('change', () => {
+      capturedBlob = null;
+      const f = fileInput.files[0];
+      if (f) preview.src = URL.createObjectURL(f);
+    });
+
+    // show popup helper
+    function showPopup(msg) {
+      popupMessage.textContent = msg;
+      popup.style.display = 'block';
+    }
+
+    // close popup (existing button calls closePopup() in file; ensure consistent)
+    window.closePopup = function() {
+      document.getElementById('customPopup').style.display = 'none';
+    };
+
+    // markForm submit -> send via fetch to /garbage/report
+    markForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // collect lat/lng (your residentMap.js should fill these)
+      const lat = latEl.value;
+      const lng = lngEl.value;
+      if (!lat || !lng) {
+        showPopup('Please select/mark a location on the map first.');
+        return;
+      }
+
+      const form = new FormData();
+      form.append('lat', lat);
+      form.append('lng', lng);
+
+      if (capturedBlob) {
+        form.append('photo', capturedBlob, 'capture.jpg');
+      } else if (fileInput.files && fileInput.files[0]) {
+        form.append('photo', fileInput.files[0]);
+      } else {
+        showPopup('Please capture a photo or choose a file.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/garbage/report', { method: 'POST', body: form });
+        if (!res.ok) {
+          const err = await res.json().catch(()=>({error:res.statusText}));
+          throw new Error(err.error || res.statusText);
+        }
+        const body = await res.json();
+        stopCamera();
+        capturedBlob = null;
+        fileInput.value = '';
+        preview.src = body.report?.image || '';
+        showPopup('Report uploaded successfully.');
+      } catch (err) {
+        console.error(err);
+        showPopup('Upload failed: ' + (err.message || 'server error'));
+      }
+    });
+  })();
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="/javascripts/residentMap.js"></script>
+  <script src="/javascripts/script.js"></script>
 </body>
+
 </html>
